@@ -1,6 +1,7 @@
+/* eslint-disable linebreak-style */
 // const mongoose = require('mongoose');
-const User = require("../models/user");
-const utils = require("../utils");
+const User = require('../models/user');
+const utils = require('../utils');
 
 module.exports.getUsers = (_, res) => {
   User.find()
@@ -31,11 +32,13 @@ module.exports.getUserById = (req, res) => {
 };
 
 module.exports.updateUser = (req, res) => {
-  const { _id, name, about, avatar } = req.body;
+  const {
+    _id, name, about, avatar,
+  } = req.body;
   return User.findByIdAndUpdate(
     _id,
     { name, about, avatar },
-    { returnDocument: "after" }
+    { returnDocument: 'after' },
   )
     .orFail()
     .then((user) => {
@@ -46,7 +49,7 @@ module.exports.updateUser = (req, res) => {
 
 module.exports.updateUserAvatar = (req, res) => {
   const { _id, avatar } = req.body;
-  return User.findByIdAndUpdate(_id, { avatar }, { returnDocument: "after" })
+  return User.findByIdAndUpdate(_id, { avatar }, { returnDocument: 'after' })
     .orFail()
     .then((user) => {
       res.status(200).json(user);

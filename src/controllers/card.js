@@ -1,5 +1,6 @@
-const Card = require("../models/card");
-const utils = require("../utils");
+/* eslint-disable linebreak-style */
+const Card = require('../models/card');
+const utils = require('../utils');
 
 module.exports.getCards = (_, res) => {
   Card.find()
@@ -8,12 +9,14 @@ module.exports.getCards = (_, res) => {
 };
 
 module.exports.createCard = (req, res) => {
-  const { name, link, owner, likes, createdAt } = req.body;
+  const {
+    name, link, likes, createdAt,
+  } = req.body;
 
   const newCard = new Card({
     name,
     link,
-    owner,
+    owner: req.user._id,
     likes,
     createdAt,
   });
@@ -27,26 +30,24 @@ module.exports.deleteCardById = (req, res) => {
   const { cardId } = req.params;
   return Card.findByIdAndRemove({ _id: cardId })
     .orFail()
-    .then(() => res.status(200).json({ message: "OK" }))
+    .then(() => res.status(200).json({ message: 'OK' }))
     .catch((e) => utils.intoServerErrorResponse(res, e));
 };
 
-module.exports.addCardLike = (req, res) =>
-  Card.findByIdAndUpdate(
-    req.params.cardId,
-    { $addToSet: { likes: req.user._id } },
-    { new: true }
-  )
-    .orFail()
-    .then((result) => res.status(200).json(result))
-    .catch((e) => utils.intoServerErrorResponse(res, e));
+module.exports.addCardLike = (req, res) => Card.findByIdAndUpdate(
+  req.params.cardId,
+  { $addToSet: { likes: req.user._id } },
+  { new: true },
+)
+  .orFail()
+  .then((result) => res.status(200).json(result))
+  .catch((e) => utils.intoServerErrorResponse(res, e));
 
-module.exports.removeCardLike = (req, res) =>
-  Card.findByIdAndUpdate(
-    req.params.cardId,
-    { $pull: { likes: req.user._id } },
-    { new: true }
-  )
-    .orFail()
-    .then((result) => res.status(200).json(result))
-    .catch((e) => utils.intoServerErrorResponse(res, e));
+module.exports.removeCardLike = (req, res) => Card.findByIdAndUpdate(
+  req.params.cardId,
+  { $pull: { likes: req.user._id } },
+  { new: true },
+)
+  .orFail()
+  .then((result) => res.status(200).json(result))
+  .catch((e) => utils.intoServerErrorResponse(res, e));
