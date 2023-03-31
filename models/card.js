@@ -5,7 +5,7 @@ const T = mongoose.Types;
 
 const cardSchema = new mongoose.Schema({
   name: {
-    type: String, min: 2, max: 30, required: true,
+    type: String, minlength: 2, maxlength: 30, required: true,
   },
   link: { type: String, required: true },
   owner: { type: T.ObjectId, required: true },

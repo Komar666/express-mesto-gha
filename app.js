@@ -3,10 +3,10 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
 
+const { PORT = 3000 } = process.env;
 const app = express();
 
 const DB_CON_STRING = 'mongodb://127.0.0.1:27017';
-const port = 3000;
 
 const rootRouter = require('./routes');
 
@@ -33,6 +33,6 @@ mongoose
     console.log('Error while connecting to db');
   });
 
-app.listen(port, () => {
-  console.log(`Express up & listen on ${port} port`);
+app.listen(PORT, () => {
+  console.log(`Express up & listen on ${PORT} port`);
 });

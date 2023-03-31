@@ -15,11 +15,11 @@ module.exports.intoServerErrorResponse = (res, err) => {
   // if (VALIDATION_ERRORS.includes(err.name)) { STATUS = 400; }
   let message = 'произошла ошибка';
 
-  if (err.message === 'DocumentNotFoundError') {
+  if (err.name === 'DocumentNotFoundError') {
     STATUS = 404;
     message = 'Not found';
   }
-  if (err.message === 'ValidationError' || err.message === 'CastError') {
+  if (err.name === 'ValidationError' || err.name === 'CastError') {
     STATUS = 400;
     message = 'ошибка валидации';
   }
