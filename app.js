@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const app = express();
 
 const DB_CON_STRING = 'mongodb://127.0.0.1:27017';
-const port = 5000;
+const port = 3000;
 
 const rootRouter = require('./routes');
 
