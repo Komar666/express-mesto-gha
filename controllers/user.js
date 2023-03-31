@@ -38,7 +38,7 @@ module.exports.updateUser = (req, res) => {
   return User.findByIdAndUpdate(
     req.user._id,
     { name, about },
-    { runValidators: true },
+    { runValidators: true, returnDocument: 'after' },
   )
     .orFail()
     .then((user) => {
@@ -49,7 +49,7 @@ module.exports.updateUser = (req, res) => {
 
 module.exports.updateUserAvatar = (req, res) => {
   const { avatar } = req.body;
-  return User.findByIdAfindUpdate(req.user._id, { avatar }, { runValidators: true })
+  return User.findByIdAndUpdate(req.user._id, { avatar }, { runValidators: true, returnDocument: 'after' })
     .orFail()
     .then((user) => {
       res.status(200).json(user);
