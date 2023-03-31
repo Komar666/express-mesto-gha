@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 // const VALIDATION_ERRORS = [
 //     'ValidationError',
 //     'CastError',
@@ -8,13 +9,11 @@
 // ];
 
 module.exports.intoServerErrorResponse = (res, err) => {
-  console.log('error is', err);
-
   let STATUS = 500;
 
   // if (NOT_FOUND_ERRORS.includes(err.name)) { STATUS = 404; }
   // if (VALIDATION_ERRORS.includes(err.name)) { STATUS = 400; }
-  const message = 'произошла ошибка';
+  let message = 'произошла ошибка';
 
   if (err.message === 'DocumentNotFoundError') {
     STATUS = 404;
