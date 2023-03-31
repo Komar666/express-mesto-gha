@@ -33,12 +33,12 @@ module.exports.getUserById = (req, res) => {
 
 module.exports.updateUser = (req, res) => {
   const {
-    _id, name, about, avatar,
+    name, about,
   } = req.body;
   return User.findByIdAndUpdate(
-    _id,
-    { name, about, avatar },
-    { returnDocument: 'after' },
+    req.user._id,
+    { name, about },
+    { runValidators: true },
   )
     .orFail()
     .then((user) => {
@@ -48,8 +48,8 @@ module.exports.updateUser = (req, res) => {
 };
 
 module.exports.updateUserAvatar = (req, res) => {
-  const { _id, avatar } = req.body;
-  return User.findByIdAndUpdate(_id, { avatar }, { returnDocument: 'after' })
+  const { avatar } = req.body;
+  return User.findByIdAfindUpdate(req.user._id, { avatar }, { runValidators: true })
     .orFail()
     .then((user) => {
       res.status(200).json(user);

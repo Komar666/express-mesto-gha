@@ -10,15 +10,14 @@ module.exports.getCards = (_, res) => {
 
 module.exports.createCard = (req, res) => {
   const {
-    name, link, likes, createdAt,
+    name, link,
   } = req.body;
 
   const newCard = new Card({
     name,
     link,
     owner: req.user._id,
-    likes,
-    createdAt,
+
   });
   return newCard
     .save()
