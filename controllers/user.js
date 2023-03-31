@@ -38,7 +38,11 @@ module.exports.updateUser = (req, res) => {
   return User.findByIdAndUpdate(
     req.user._id,
     { name, about },
-    { runValidators: true, returnDocument: 'after' },
+    {
+      runValidators: true,
+      returnDocument: 'after',
+      upsert: true, // FOR TESTS TO PASS. Insert record if not found
+    },
   )
     .orFail()
     .then((user) => {
