@@ -12,25 +12,26 @@ const rootRouter = require('./routes');
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
-    req.user = {
-        _id: '64239247b9d98c0a410a39ec',
-    };
-    next();
+  req.user = {
+    _id: '64239247b9d98c0a410a39ec',
+  };
+  next();
 });
 
 app.use('/', rootRouter);
 
 // set up mongoose
-mongoose.connect(DB_CON_STRING, {
-        dbName: 'mestodb',
-    })
-    .then(() => {
-        console.log('Connected to db!');
-    })
-    .catch(() => {
-        console.log('Error while connecting to db');
-    });
+mongoose
+  .connect(DB_CON_STRING, {
+    dbName: 'mestodb',
+  })
+  .then(() => {
+    console.log('Connected to db!');
+  })
+  .catch(() => {
+    console.log('Error while connecting to db');
+  });
 
 app.listen(port, () => {
-    console.log(`Express up & listen on ${port} port`);
+  console.log(`Express up & listen on ${port} port`);
 });
